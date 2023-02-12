@@ -10,8 +10,8 @@ import (
 const timeFormat = "2006-01-02T15:04:05.999999999"
 
 type Spot struct {
-	ID                int       `json:"id"`
-	UserID            int       `json:"userID"`
+	ID                uint64    `json:"id"`
+	UserID            uint64    `json:"userID"`
 	TimeStamp         time.Time `json:"timeStamp"`
 	Comments          string    `json:"comments"`
 	Callsign          string    `json:"callsign"`
@@ -27,8 +27,8 @@ type Spot struct {
 
 func (s *Spot) UnmarshalJSON(data []byte) error {
 	type rawBlob struct {
-		ID                int    `json:"id"`
-		UserID            int    `json:"userID"`
+		ID                uint64 `json:"id"`
+		UserID            uint64 `json:"userID"`
 		TimeStamp         string `json:"timeStamp"`
 		Comments          string `json:"comments"`
 		Callsign          string `json:"callsign"`
