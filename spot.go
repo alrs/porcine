@@ -22,7 +22,7 @@ type Spot struct {
 	Frequency         float32   `json:"frequency"`
 	Mode              string    `json:"mode"`
 	SummitDetails     string    `json:"summitDetails"`
-	HighlightColor    string    `json:"higlightColor"`
+	HighlightColor    string    `json:"highlightColor"`
 }
 
 func cleanFreq(freq string) string {
@@ -46,7 +46,7 @@ func (s *Spot) UnmarshalJSON(data []byte) error {
 		Frequency         string `json:"frequency"`
 		Mode              string `json:"mode"`
 		SummitDetails     string `json:"summitDetails"`
-		HighlightColor    string `json:"higlightColor"`
+		HighlightColor    string `json:"highlightColor"`
 	}
 	var rb rawBlob
 	err := json.Unmarshal(data, &rb)
