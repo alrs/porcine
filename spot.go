@@ -25,6 +25,13 @@ type Spot struct {
 	HighlightColor    string    `json:"higlightColor"`
 }
 
+func cleanFreq(freq string) string {
+	freq = strings.ReplaceAll(freq, ":", ".")
+	freq = strings.ReplaceAll(freq, ";", ".")
+	freq = strings.ReplaceAll(freq, ",", ".")
+	return freq
+}
+
 func (s *Spot) UnmarshalJSON(data []byte) error {
 	type rawBlob struct {
 		ID                uint64 `json:"id"`
@@ -58,7 +65,7 @@ func (s *Spot) UnmarshalJSON(data []byte) error {
 	s.SummitCode = rb.SummitCode
 	s.ActivatorCallsign = rb.ActivatorCallsign
 	s.ActivatorName = rb.ActivatorName
-	f, err := strconv.ParseFloat(rb.Frequency, 32)
+	f, err := strconv.ParseFloat(cleanFreq(rb.Frequency), 32)
 	s.Frequency = float32(f)
 	s.Mode = strings.ToLower(rb.Mode)
 	s.SummitDetails = rb.SummitDetails
