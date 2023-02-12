@@ -66,6 +66,9 @@ func (s *Spot) UnmarshalJSON(data []byte) error {
 	s.ActivatorCallsign = rb.ActivatorCallsign
 	s.ActivatorName = rb.ActivatorName
 	f, err := strconv.ParseFloat(cleanFreq(rb.Frequency), 32)
+	if err != nil {
+		return err
+	}
 	s.Frequency = float32(f)
 	s.Mode = strings.ToLower(rb.Mode)
 	s.SummitDetails = rb.SummitDetails
