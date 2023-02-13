@@ -18,6 +18,7 @@ package sota
 
 import (
 	"encoding/json"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -41,7 +42,20 @@ type Spot struct {
 	HighlightColor    string    `json:"highlightColor"`
 }
 
+func (s *Spot) Summary() string {
+	return fmt.Sprintf("%s/%s %.3f%s %s %q %s",
+		s.AssociationCode,
+		s.SummitCode,
+		s.Frequency,
+		s.Mode,
+		s.ActivatorCallsign,
+		s.ActivatorName,
+		s.SummitDetails,
+	)
+}
+
 func cleanFreq(freq string) string {
+	freq = strings.TrimSpace(freq)
 	freq = strings.ReplaceAll(freq, ":", ".")
 	freq = strings.ReplaceAll(freq, ";", ".")
 	freq = strings.ReplaceAll(freq, ",", ".")

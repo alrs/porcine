@@ -4,7 +4,11 @@ go 1.19
 
 require (
 	github.com/davecgh/go-spew v1.1.1
-	go.etcd.io/bbolt v1.3.7
+	github.com/fluffle/goirc v1.3.0
 )
 
-require golang.org/x/sys v0.4.0 // indirect
+require (
+	github.com/emersion/go-sasl v0.0.0-20220912192320-0145f2c60ead // indirect
+	github.com/golang/mock v1.5.0 // indirect
+	golang.org/x/net v0.6.0 // indirect
+)
