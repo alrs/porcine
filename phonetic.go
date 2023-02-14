@@ -1,8 +1,7 @@
-package main
+package phonetic
 
 import (
 	"bytes"
-	"fmt"
 )
 
 var stringNATO map[rune]string
@@ -19,14 +18,14 @@ func init() {
 		'1': "one",
 		'2': "two",
 		'3': "free",
-		'4': "foyer",
+		'4': "foier",
 		'5': "fife",
 		'6': "six",
 		'7': "seven",
 		'8': "eight",
 		'9': "nine",
 		'a': "alpha",
-		'b': "beta",
+		'b': "bravo",
 		'c': "charlie",
 		'd': "delta",
 		'e': "echo",
@@ -58,13 +57,25 @@ func init() {
 	}
 }
 
+func StringToNATO(s string) string {
+	return stringToNATO(s)
+}
+
+func stringToNATO(s string) string {
+	return string(bytesToNATO([]byte(s)))
+}
+
+func BytesToNATO(b []byte) []byte {
+	return bytesToNATO(b)
+}
+
 func bytesToNATO(b []byte) []byte {
-	result := make([]byte, len(b))
+	result := make([]byte, 0, len(b))
 	b = bytes.ToLower(b)
 	for i, v := range b {
 		if w, ok := byteNATO[v]; ok {
 			result = append(result, w...)
-			if i < len(b) {
+			if i < len(b)-1 {
 				result = append(result, []byte(" ")[0])
 			}
 		} else {
