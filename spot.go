@@ -22,6 +22,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/alrs/phonetic"
 )
 
 const timeFormat = "2006-01-02T15:04:05.999999999"
@@ -40,6 +42,19 @@ type Spot struct {
 	Mode              string    `json:"mode"`
 	SummitDetails     string    `json:"summitDetails"`
 	HighlightColor    string    `json:"highlightColor"`
+}
+
+func (s *Spot) Phonetic() string {
+	code := phonetic.StringToNATO(
+		fmt.Sprintf("%s/%s",
+			s.AssociationCode,
+			s.SummitCode),
+	)
+	freq := phonetic.StringToNATO(fmt.Sprintf("%.3f", s.Frequency))
+	call := phonetic.StringToNATO(s.ActivatorCallsign)
+	return fmt.Sprintf(
+		"activation %s frequency %s mode %s callsign %s", code, freq, s.Mode, call,
+	)
 }
 
 func (s *Spot) Summary() string {

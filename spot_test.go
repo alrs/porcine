@@ -32,3 +32,16 @@ func TestSpot(t *testing.T) {
 	}
 	spew.Dump(s)
 }
+
+func TestPhonetic(t *testing.T) {
+	s := Spot{
+		ID:                1234,
+		AssociationCode:   "w6",
+		SummitCode:        "5678-3",
+		Mode:              "cw",
+		Frequency:         146.520,
+		ActivatorCallsign: "KJ6CBE",
+	}
+	t.Log(spew.Sdump(s.Phonetic()))
+
+}
