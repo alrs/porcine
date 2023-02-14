@@ -8,8 +8,6 @@ import (
 	"github.com/davecgh/go-spew/spew"
 )
 
-const uri = "https://api2.sota.org.uk/api/spots/-1/all"
-
 func main() {
 	seen := make(map[uint64]sota.Spot)
 	firstRun := true
