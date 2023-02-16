@@ -20,11 +20,18 @@ import (
 	"bytes"
 )
 
-var stringNATO map[rune]string
-var byteNATO map[byte][]byte
+// An Alphabet reprents a mapping of alphabetic letters to their
+// documented word-length representations as well as modified
+// words optimized for speech synthesis.
+type Alphabet struct {
+	letterMap map[rune]string
+	spoken    map[rune]string
+}
+
+var NATO Alphabet
 
 func init() {
-	stringNATO = map[rune]string{
+	NATO.letterMap = map[rune]string{
 		'.': "decimal",
 		'/': "slant",
 		'-': "hypen",
@@ -33,14 +40,14 @@ func init() {
 		'0': "zero",
 		'1': "one",
 		'2': "two",
-		'3': "free",
-		'4': "foier",
+		'3': "tree",
+		'4': "fower",
 		'5': "fife",
 		'6': "six",
 		'7': "seven",
 		'8': "eight",
-		'9': "nine",
-		'a': "alpha",
+		'9': "niner",
+		'a': "alfa",
 		'b': "bravo",
 		'c': "charlie",
 		'd': "delta",
@@ -49,7 +56,7 @@ func init() {
 		'g': "golf",
 		'h': "hotel",
 		'i': "india",
-		'j': "juliet",
+		'j': "juliett",
 		'k': "kilo",
 		'l': "lima",
 		'm': "mike",
@@ -67,35 +74,39 @@ func init() {
 		'y': "yankee",
 		'z': "zulu",
 	}
-	byteNATO = make(map[byte][]byte, len(stringNATO))
-	for k, v := range stringNATO {
-		byteNATO[byte(k)] = []byte(v)
+
+	// override letters poorly pronounced by speech synthesis
+	NATO.spoken = map[rune]string{
+		'4': "foewhur",
+		'j': "juliet",
+		'p': "pawpaw",
+		'x': "ecksray",
 	}
 }
 
-func StringToNATO(s string) string {
-	return stringToNATO(s)
+func (a *Alphabet) Convert(s string, spoken bool) string {
+	b := a.ConvertBytes([]byte(s), spoken)
+	return string(b)
 }
 
-func stringToNATO(s string) string {
-	return string(bytesToNATO([]byte(s)))
-}
-
-func BytesToNATO(b []byte) []byte {
-	return bytesToNATO(b)
-}
-
-func bytesToNATO(b []byte) []byte {
+// ConvertBytes changes a byteslice of characters into an expanded byteslice
+// of their phonetic representation, either literal or modified for speech
+// synthesis.
+func (a *Alphabet) ConvertBytes(b []byte, spoken bool) []byte {
 	result := make([]byte, 0, len(b))
 	b = bytes.ToLower(b)
 	for i, v := range b {
-		if w, ok := byteNATO[v]; ok {
-			result = append(result, w...)
-			if i < len(b)-1 {
-				result = append(result, []byte(" ")[0])
-			}
+		// is the rune in the lettermap?
+		s, ok := a.spoken[rune(v)]
+		if spoken && ok {
+			result = append(result, s...)
 		} else {
-			result = append(result, v)
+			if w, ok := a.letterMap[rune(v)]; ok {
+				result = append(result, w...)
+			}
+		}
+		if i < len(b)-1 {
+			result = append(result, []byte(" ")[0])
 		}
 	}
 	return result

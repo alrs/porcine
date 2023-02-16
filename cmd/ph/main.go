@@ -30,7 +30,7 @@ func main() {
 		if err := scanner.Err(); err != nil {
 			log.Fatal(err)
 		}
-		_, err := os.Stdout.Write(phonetic.BytesToNATO(scanner.Bytes()))
+		_, err := os.Stdout.Write(phonetic.NATO.ConvertBytes(scanner.Bytes(), false))
 		if err != nil {
 			log.Fatal(err)
 		}
