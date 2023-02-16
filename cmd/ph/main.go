@@ -26,6 +26,7 @@ import (
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
 		if err := scanner.Err(); err != nil {
 			log.Fatal(err)
@@ -34,5 +35,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		os.Stdout.Write([]byte("\n"))
 	}
 }

@@ -60,17 +60,20 @@ func (a *Alphabet) ConvertBytes(b []byte, spoken bool) []byte {
 	result := make([]byte, 0, len(b))
 	b = bytes.ToLower(b)
 	for i, v := range b {
-		// is the rune in the lettermap?
+		// is the rune in the spoken lettermap?
 		s, ok := a.spoken[rune(v)]
+		// is spoken mode on?
 		if spoken && ok {
 			result = append(result, s...)
 		} else {
+			// is the rune in the literal map?
 			if w, ok := a.literal[rune(v)]; ok {
 				result = append(result, w...)
 			}
 		}
+		// pad between words until the last character
 		if i < len(b)-1 {
-			result = append(result, []byte(" ")[0])
+			result = append(result, byte(' '))
 		}
 	}
 	return result
