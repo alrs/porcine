@@ -30,10 +30,15 @@ type Alphabet struct {
 	spoken  letterMap
 }
 
+// World War II Combined Communications Board phonetic alphabet.
+var CCB Alphabet
+
+// 1956 ICAO phonetic alphabet.
 var NATO Alphabet
 
 func init() {
 	initNATO()
+	initCCB()
 }
 
 func newAlphabet(l letterMap, s letterMap) Alphabet {

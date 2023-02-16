@@ -4,6 +4,13 @@ import (
 	"testing"
 )
 
+func TestCCB(t *testing.T) {
+	want := "able baker charlie"
+	got := CCB.Convert("abc", true)
+	if want != got {
+		t.Fatalf("want:%q got:%q", want, got)
+	}
+}
 func TestConvertBytes(t *testing.T) {
 	want := "tree fower fife"
 	got := string(NATO.ConvertBytes([]byte("345"), false))
