@@ -20,68 +20,27 @@ import (
 	"bytes"
 )
 
-// An Alphabet reprents a mapping of alphabetic letters to their
+type letterMap map[rune]string
+
+// An Alphabet reprents a mapping of Alphabetic letters to their
 // documented word-length representations as well as modified
 // words optimized for speech synthesis.
 type Alphabet struct {
-	letterMap map[rune]string
-	spoken    map[rune]string
+	literal letterMap
+	spoken  letterMap
 }
 
 var NATO Alphabet
 
 func init() {
-	NATO.letterMap = map[rune]string{
-		'.': "decimal",
-		'/': "slant",
-		'-': "hypen",
-		':': "colon",
-		';': "semicolon",
-		'0': "zero",
-		'1': "one",
-		'2': "two",
-		'3': "tree",
-		'4': "fower",
-		'5': "fife",
-		'6': "six",
-		'7': "seven",
-		'8': "eight",
-		'9': "niner",
-		'a': "alfa",
-		'b': "bravo",
-		'c': "charlie",
-		'd': "delta",
-		'e': "echo",
-		'f': "foxtrot",
-		'g': "golf",
-		'h': "hotel",
-		'i': "india",
-		'j': "juliett",
-		'k': "kilo",
-		'l': "lima",
-		'm': "mike",
-		'n': "november",
-		'o': "oscar",
-		'p': "papa",
-		'q': "quebec",
-		'r': "romeo",
-		's': "sierra",
-		't': "tango",
-		'u': "uniform",
-		'v': "victor",
-		'w': "whiskey",
-		'x': "xray",
-		'y': "yankee",
-		'z': "zulu",
-	}
+	initNATO()
+}
 
-	// override letters poorly pronounced by speech synthesis
-	NATO.spoken = map[rune]string{
-		'4': "foewhur",
-		'j': "juliet",
-		'p': "pawpaw",
-		'x': "ecksray",
-	}
+func newAlphabet(l letterMap, s letterMap) Alphabet {
+	a := Alphabet{}
+	a.literal = l
+	a.spoken = s
+	return a
 }
 
 func (a *Alphabet) Convert(s string, spoken bool) string {
@@ -101,7 +60,7 @@ func (a *Alphabet) ConvertBytes(b []byte, spoken bool) []byte {
 		if spoken && ok {
 			result = append(result, s...)
 		} else {
-			if w, ok := a.letterMap[rune(v)]; ok {
+			if w, ok := a.literal[rune(v)]; ok {
 				result = append(result, w...)
 			}
 		}
