@@ -1,5 +1,4 @@
-// package sota
-// Copyright (C) 2023 Lars Lehtonen KJ6CBE
+// Copyright (C) 2023-2025 Lars Lehtonen KJ6CBE
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
