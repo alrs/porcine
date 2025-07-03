@@ -13,7 +13,7 @@ func TestReadCSV(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	summits, err := readCSV(f)
+	summits, err := ReadCSV(f)
 	if err != nil {
 		t.Fatal(err)
 	}

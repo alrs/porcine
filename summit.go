@@ -97,7 +97,7 @@ func parseLine(l []string) (s Summit, err error) {
 	return
 }
 
-func readCSV(f *os.File) (summits []Summit, err error) {
+func ReadCSV(f *os.File) (summits []Summit, err error) {
 	reader := csv.NewReader(f)
 	reader.FieldsPerRecord = 17
 	var l []string
