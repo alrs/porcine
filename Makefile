@@ -6,6 +6,7 @@ FCC2BOLT := bin/fcc2bolt
 FCCD := bin/fccd
 FCCDB := bin/fccdb
 PH := bin/ph
+SPOTS := bin/spots
 DBDIR := /usr/share/fccdb
 
 .PHONY: all
@@ -22,14 +23,14 @@ help:
 	@echo
 
 .PHONY: binaries
-binaries: $(FCC2BOLT) $(FCCDB) $(FCCD) $(PH)
+binaries: $(FCC2BOLT) $(FCCDB) $(FCCD) $(PH) $(SPOTS)
 
 .PHONY: ingest
 ingest: $(BOLTDB)
 
 .PHONY: clean
 clean:
-	rm -f $(DUMPFILE) $(BOLTDB) $(FCC2BOLT) $(FCCDB) $(FCCD)
+	rm -f $(DUMPFILE) $(BOLTDB) $(FCC2BOLT) $(FCCDB) $(FCCD) $(PH) $(SPOTS)
 
 .PHONY: download
 download: $(DUMPFILE)
@@ -58,6 +59,9 @@ $(FCCD):
 
 $(PH):
 	go build -o $@ cmd/ph/main.go
+
+$(SPOTS):
+	go build -o $@ cmd/spots/main.go
 
 
 $(DBDIR):
