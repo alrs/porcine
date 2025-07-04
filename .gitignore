@@ -1,5 +1,6 @@
 *.swp
 artifacts/*.zip
 artifacts/*.db
+artifacts/*.csv
 bin/*
 cmd/ph/ph
