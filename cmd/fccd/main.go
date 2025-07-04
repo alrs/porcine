@@ -10,7 +10,7 @@ import (
 
 	bolt "go.etcd.io/bbolt"
 
-	"github.com/alrs/fcc"
+	"github.com/alrs/porcine/fcc"
 )
 
 func licenseHandler(w http.ResponseWriter, r *http.Request, b *bolt.Bucket) {

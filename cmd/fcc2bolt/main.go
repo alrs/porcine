@@ -25,7 +25,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/alrs/fcc"
+	"github.com/alrs/porcine/fcc"
 
 	"github.com/davecgh/go-spew/spew"
 	bolt "go.etcd.io/bbolt"
