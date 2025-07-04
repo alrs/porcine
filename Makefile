@@ -5,6 +5,7 @@ BOLTDB := artifacts/fcc.db
 FCC2BOLT := bin/fcc2bolt
 FCCD := bin/fccd
 FCCDB := bin/fccdb
+PH := bin/ph
 DBDIR := /usr/share/fccdb
 
 .PHONY: all
@@ -21,7 +22,7 @@ help:
 	@echo
 
 .PHONY: binaries
-binaries: $(FCC2BOLT) $(FCCDB) $(FCCD)
+binaries: $(FCC2BOLT) $(FCCDB) $(FCCD) $(PH)
 
 .PHONY: ingest
 ingest: $(BOLTDB)
@@ -54,6 +55,10 @@ $(FCCDB):
 
 $(FCCD):
 	go build -o $@ cmd/fccd/main.go
+
+$(PH):
+	go build -o $@ cmd/ph/main.go
+
 
 $(DBDIR):
 	mkdir -p $@

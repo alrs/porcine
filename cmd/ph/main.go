@@ -21,7 +21,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/alrs/phonetic"
+	"github.com/porcine/alrs/phonetic"
 )
 
 func main() {
