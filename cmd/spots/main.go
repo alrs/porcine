@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/alrs/sota"
+	"github.com/alrs/porcine/sota"
 	"github.com/davecgh/go-spew/spew"
 )
 
