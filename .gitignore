@@ -2,3 +2,4 @@
 artifacts/*.zip
 artifacts/*.db
 bin/*
+cmd/ph/ph
